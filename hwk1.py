@@ -183,7 +183,6 @@ class UnigramModel(LanguageModel):
               self.count += 1        
 
     def generateSentence(self):
-        ### TODO ###
         result = [START]
         curr = START
         while curr != END:
@@ -197,10 +196,10 @@ class UnigramModel(LanguageModel):
 
         return result
 
-        
+        ### TODO ###
+        # return []
 
     def getSentenceLogProbability(self, sentence):
-        ### TODO ###
         prob = 0.0
         for word in sentence:
           if word != START:
@@ -209,10 +208,10 @@ class UnigramModel(LanguageModel):
               return 0
             prob += math.log(temp/self.total)
         return prob       
+        ### TODO ###
         # return 0.0
         
     def getCorpusPerplexity(self, testCorpus):
-        ### TODO ###
         prob = 0.0
         count = 0
         for sen in testCorpus:
@@ -221,6 +220,8 @@ class UnigramModel(LanguageModel):
               prob += math.log(self.vab[word]/self.total)
               count += 1
         return math.exp(-1/count * prob)        
+        ### TODO ###
+        # return 0.0
 
 """We provide you with a testing function that uses very simple training & test corpora (you could compute probability/perplexity by hand if you wanted to). Note that passing this test does not guarantee you a perfect score in the autograder; this is simply to help you debug your model."""
 
@@ -328,7 +329,6 @@ $$P_L(w)=\frac{c(w)+1}{N+S}$$
 
 class SmoothedUnigramModel(LanguageModel):
     def __init__(self, trainCorpus):
-        ### TODO ###
         self.count = 0
         self.total = 0
         self.vab = {}
@@ -340,9 +340,10 @@ class SmoothedUnigramModel(LanguageModel):
               self.total += 1
             else:
               self.count += 1  
+        ### TODO ###
+        # pass
 
     def generateSentence(self):
-        ### TODO ###
         result = [START]
         curr = START
         while curr != END:
@@ -354,17 +355,19 @@ class SmoothedUnigramModel(LanguageModel):
           curr = word
           result.append(curr)
         return result
+        ### TODO ###
+        # return []
 
     def getSentenceLogProbability(self, sentence):
-        ### TODO ###
         prob = 0.0
         for word in sentence:
           if word != START:
             prob += math.log((self.vab[word]+1)/(self.total+len(self.vab.keys())))
         return prob
+        ### TODO ###
+        # return 0.0
         
     def getCorpusPerplexity(self, testCorpus):
-        ### TODO ###
         prob = 0.0
         count = 0
         for sen in testCorpus:
@@ -373,6 +376,8 @@ class SmoothedUnigramModel(LanguageModel):
               prob += math.log((self.vab[word] + 1) / (self.total + len(self.vab.keys())))
               count += 1
         return math.exp(-1/count*prob)
+        ### TODO ###
+        # return 0.0
 
 if __name__=='__main__':
     testModel('smoothed-unigram')
@@ -389,6 +394,7 @@ class BigramModel(LanguageModel):
     def __init__(self, trainCorpus):
 
         ### TODO ###
+        # pass
         self.vocab_1 = {}
         self.vocab_2 = {}
         self.total = 0
@@ -407,7 +413,6 @@ class BigramModel(LanguageModel):
 
 
     def generateSentence(self):
-        ### TODO ###
         result = [START]
         curr = START
         while curr != END:
@@ -423,9 +428,10 @@ class BigramModel(LanguageModel):
           curr = word
           result.append(curr)
         return result
+        ### TODO ###
+        # return []
 
     def getSentenceLogProbability(self, sentence):
-        ### TODO ###
         prob = 0.0
         curr = "#"
         for word in sentence:
@@ -441,9 +447,11 @@ class BigramModel(LanguageModel):
           prob += math.log(self.vocab_2[word+" "+curr] / num)
           curr = word
         return prob
+        ### TODO ###
+        # return 0.0
         
     def getCorpusPerplexity(self, testCorpus):
-        ### TODO ###
+
         prev = "#"
         prob = 0.0
         for sen in testCorpus:
@@ -460,6 +468,8 @@ class BigramModel(LanguageModel):
             prob += math.log(self.vocab_2[word+" "+ prev] / num)
             prev = word
         return math.exp(-1/self.total * prob)
+        ### TODO ###
+        # return 0.0
 
 if __name__=='__main__':
     testModel('bigram')
@@ -513,6 +523,7 @@ class SmoothedBigramModelAD(LanguageModel):
     def generateSentence(self):
 
         ### TODO ###
+        # return []
         result = [START]
         curr = START
         while curr != END:
